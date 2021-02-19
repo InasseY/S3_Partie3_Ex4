@@ -8,42 +8,40 @@ namespace Partie3_Ex4
 
         {
         
-                // generateur de nombre aléatoire 
-                Random random = new Random();
 
-                //retourne un nombre aléatoire entier non négatif.
-                int returnvalue = random.Next(1, 51);
-            int response;
+            //définir une variable aléatoire, 
+            Random aleatoire = new Random();
+            int secretnumber = aleatoire.Next(1, 51);
+            int attempts = 1; // nombre d'essaie 
+            int success = 0;
+
+            Console.WriteLine("Devine un nombre entre 1 et 50 ");
+            int input = int.Parse(Console.ReadLine());
 
             do
-
             {
-                Console.WriteLine(" Devine un nombre entre 1 et 50 ");
-                response = Convert.ToInt32(Console.ReadLine());
-
-
-                if (response > returnvalue)
+                if (input == secretnumber)
                 {
-                    Console.WriteLine($"Non le chiffre est plus petit que {response} retente ta chance !");
-                    response = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine($"essaie n°{attempts} \n Gagné !");
+                    success = 1;
                 }
-
-                else if (response < returnvalue)
+                else if (input < secretnumber)
                 {
-                    Console.WriteLine($"Non, le chiffre est plus grand que {response} retente ta chance !");
-                    response = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine($"essaie n° {attempts} \n trop petit, retente ta chance !");
+                    attempts++;
+                    input = int.Parse(Console.ReadLine());
                 }
-            }
-            while (response != returnvalue);
-                
-
-                Console.WriteLine($"non retente ta chance ce n'est pas {returnvalue} ");
-                
-             
-    }
+                else if (input > secretnumber)
+                {
+                    Console.WriteLine($"essaie n° {attempts} \n Ah trop grand!  retente ta chance !");
+                    attempts++;
+                    input = int.Parse(Console.ReadLine());
+                }
+            } while (success == 0);
+        }
     }
 }
-   
+
 
 
 /* Code qui fonctionne 
